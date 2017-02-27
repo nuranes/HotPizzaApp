@@ -1,0 +1,38 @@
+﻿@model HotPizzaApp.Models.Henvendelse
+@{
+    ViewBag.Title = "Lag ein henvendelse";
+}
+
+<h2>Lag en henvendelse</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td><lable>Navn</lable></td>
+            <td>@Html.TextBoxFor(henvendelse => henvendelse.Navn)</td>
+            <td>@Html.ValidationMessageFor(henvendelse => henvendelse.Navn)</td>
+        </tr>
+
+        <tr>
+            <td><lable>Epost</lable></td>
+            <td>@Html.TextBoxFor(henvendelse => henvendelse.Epost)</td>
+            <td>@Html.ValidationMessageFor(henvendelse => henvendelse.Epost)</td>
+        </tr>
+
+        <tr>
+            <td><lable>Tittel</lable></td>
+            <td>@Html.TextBoxFor(henvendelse => henvendelse.Tittel)</td>
+            <td>@Html.ValidationMessageFor(henvendelse => henvendelse.Tittel)</td>
+        </tr>
+
+        <tr>
+            <td><lable>Henvendelse</lable></td>
+            <td>@Html.TextAreaFor(henvendelse => henvendelse.Tekst)</td>
+            <td>@Html.ValidationMessageFor(henvendelse => henvendelse.Tekst)</td>
+        </tr>
+    </table>
+
+    <input id="sendHenvBtn" type="submit" value="Send henvendelse" />
+}
+

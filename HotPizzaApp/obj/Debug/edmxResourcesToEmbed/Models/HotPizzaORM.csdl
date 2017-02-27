@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotPizzaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Ansatt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fornavn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Etternavn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobil" Type="Int32" />
+    <Property Name="BildeSrc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AvdelingId" Type="Int32" />
+    <Property Name="RolleId" Type="Int32" />
+    <Property Name="Brukernavn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Passord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Avdeling" Relationship="Self.FK_Ansatt_Avdeling" FromRole="Ansatt" ToRole="Avdeling" />
+    <NavigationProperty Name="Rolle" Relationship="Self.FK_Ansatt_Rolle" FromRole="Ansatt" ToRole="Rolle" />
+    <NavigationProperty Name="Pizza" Relationship="Self.FK_Pizza_Ansatt" FromRole="Ansatt" ToRole="Pizza" />
+  </EntityType>
+  <EntityType Name="Avdeling">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Postnummer" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Ansatt" Relationship="Self.FK_Ansatt_Avdeling" FromRole="Avdeling" ToRole="Ansatt" />
+  </EntityType>
+  <EntityType Name="Henvendelse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Epost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tittel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tekst" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Pizza">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Beskrivelse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Pris" Type="Int32" />
+    <Property Name="BildeSrc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AnsattId" Type="Int32" />
+    <NavigationProperty Name="Ansatt" Relationship="Self.FK_Pizza_Ansatt" FromRole="Pizza" ToRole="Ansatt" />
+  </EntityType>
+  <EntityType Name="Rolle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Beskrivelse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ansatt" Relationship="Self.FK_Ansatt_Rolle" FromRole="Rolle" ToRole="Ansatt" />
+  </EntityType>
+  <Association Name="FK_Ansatt_Avdeling">
+    <End Role="Avdeling" Type="Self.Avdeling" Multiplicity="0..1" />
+    <End Role="Ansatt" Type="Self.Ansatt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Avdeling">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ansatt">
+        <PropertyRef Name="AvdelingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ansatt_Rolle">
+    <End Role="Rolle" Type="Self.Rolle" Multiplicity="0..1" />
+    <End Role="Ansatt" Type="Self.Ansatt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rolle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ansatt">
+        <PropertyRef Name="RolleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pizza_Ansatt">
+    <End Role="Ansatt" Type="Self.Ansatt" Multiplicity="0..1" />
+    <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ansatt">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pizza">
+        <PropertyRef Name="AnsattId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HotPizzaDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ansatt" EntityType="Self.Ansatt" />
+    <EntitySet Name="Avdeling" EntityType="Self.Avdeling" />
+    <EntitySet Name="Henvendelse" EntityType="Self.Henvendelse" />
+    <EntitySet Name="Pizza" EntityType="Self.Pizza" />
+    <EntitySet Name="Rolle" EntityType="Self.Rolle" />
+    <AssociationSet Name="FK_Ansatt_Avdeling" Association="Self.FK_Ansatt_Avdeling">
+      <End Role="Avdeling" EntitySet="Avdeling" />
+      <End Role="Ansatt" EntitySet="Ansatt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ansatt_Rolle" Association="Self.FK_Ansatt_Rolle">
+      <End Role="Rolle" EntitySet="Rolle" />
+      <End Role="Ansatt" EntitySet="Ansatt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pizza_Ansatt" Association="Self.FK_Pizza_Ansatt">
+      <End Role="Ansatt" EntitySet="Ansatt" />
+      <End Role="Pizza" EntitySet="Pizza" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,94 @@
+﻿body, .container{
+    margin: auto;
+    font-family: Calibri;
+}
+header{
+    height: 80px;
+    background-color: rgb(200, 200, 200);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.container{
+    width: 1200px;
+}
+.content, #contentLoggInn{
+    background-color: rgb(240, 240, 240);
+    padding:20px;
+}
+#contentLoggInn{
+    height: 400px;
+}
+.adminSec{ /*Section for admin innlogga eller logga av*/
+    border-top: solid 1px rgb(100, 100, 100);
+    border-bottom: solid 1px rgb(100, 100, 100); 
+    padding: 10px;
+}
+#pizzaArt, #henvendelseArt, #ansatteArt{ /*Article for pizza, henvendelser og ansatte*/
+    border-bottom: solid 1px rgb(100, 100, 100);
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+td{
+    padding:3px;
+}
+input{ /*Inputfelt*/
+    height: 20px;
+}
+select{ /*Dropdown-list*/
+    height: 25px;
+}
+textarea{
+    width: 500px;
+    height: 100px;
+}
+footer{
+    padding:30px;
+    background-color: rgb(100, 100, 100);
+    color: rgb(250, 250, 250);
+}
+
+/*Knapper*/
+#sendHenvBtn, #loggInnBtn, #lagreAnsattBtn, #lagreEndringBtn, #slettAnsattBtn{ 
+    color: rgb(250, 250, 250);
+    height: 50px;
+    width: 150px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: rgb(250, 250, 250);
+}
+#sendHenvBtn, #loggInnBtn, #lagreAnsattBtn, #lagreEndringBtn{
+    background-color: rgb(12, 184, 92);
+}
+#slettAnsattBtn{
+    background-color: rgb(235, 19, 0);
+}
+/*end Knapper*/
+
+img{
+    height: 150px;
+}
+.field-validation-valid{
+    display: none;
+}
+.field-validation-error{
+    color: red;
+    font-weight: bold;
+}
+
+/*Bekreftelser*/
+#sisteHenvendelse{
+    font-size: 20px;
+    color: rgb(10, 176, 84);
+    font-weight: bold;
+}
+.ikkjeLoggaInn, #slettAnsatt{
+    color: red;
+    font-weight: bold;
+}
+.loggaInn, #redigertAnsatt, #nyasteAnsatt{
+    color: rgb(10, 176, 84);
+    font-weight: bold;
+    font-size: 18px;
+}
+/*end Bekreftelser*/

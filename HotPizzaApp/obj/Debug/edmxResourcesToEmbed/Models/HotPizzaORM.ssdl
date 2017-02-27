@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotPizzaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ansatt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fornavn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Etternavn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobil" Type="int" />
+    <Property Name="BildeSrc" Type="nvarchar" MaxLength="50" />
+    <Property Name="AvdelingId" Type="int" />
+    <Property Name="RolleId" Type="int" />
+    <Property Name="Brukernavn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Passord" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Avdeling">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Navn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Postnummer" Type="nchar" MaxLength="4" />
+  </EntityType>
+  <EntityType Name="Henvendelse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Navn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Epost" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tittel" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tekst" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Pizza">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Navn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Beskrivelse" Type="nvarchar(max)" />
+    <Property Name="Pris" Type="int" />
+    <Property Name="BildeSrc" Type="nvarchar" MaxLength="50" />
+    <Property Name="AnsattId" Type="int" />
+  </EntityType>
+  <EntityType Name="Rolle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Navn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Beskrivelse" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_Ansatt_Avdeling">
+    <End Role="Avdeling" Type="Self.Avdeling" Multiplicity="0..1" />
+    <End Role="Ansatt" Type="Self.Ansatt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Avdeling">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ansatt">
+        <PropertyRef Name="AvdelingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ansatt_Rolle">
+    <End Role="Rolle" Type="Self.Rolle" Multiplicity="0..1" />
+    <End Role="Ansatt" Type="Self.Ansatt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rolle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ansatt">
+        <PropertyRef Name="RolleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pizza_Ansatt">
+    <End Role="Ansatt" Type="Self.Ansatt" Multiplicity="0..1" />
+    <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ansatt">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pizza">
+        <PropertyRef Name="AnsattId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HotPizzaDBModelStoreContainer">
+    <EntitySet Name="Ansatt" EntityType="Self.Ansatt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Avdeling" EntityType="Self.Avdeling" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Henvendelse" EntityType="Self.Henvendelse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pizza" EntityType="Self.Pizza" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rolle" EntityType="Self.Rolle" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Ansatt_Avdeling" Association="Self.FK_Ansatt_Avdeling">
+      <End Role="Avdeling" EntitySet="Avdeling" />
+      <End Role="Ansatt" EntitySet="Ansatt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ansatt_Rolle" Association="Self.FK_Ansatt_Rolle">
+      <End Role="Rolle" EntitySet="Rolle" />
+      <End Role="Ansatt" EntitySet="Ansatt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pizza_Ansatt" Association="Self.FK_Pizza_Ansatt">
+      <End Role="Ansatt" EntitySet="Ansatt" />
+      <End Role="Pizza" EntitySet="Pizza" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

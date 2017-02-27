@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@*Bekreftelse dersom ein kunde nettopp har sendt inn ein henvendelse*@
+@if (Session["SisteHenvendelse"] != null)
+{
+    String sisteHenvendelse = (String)Session["SisteHenvendelse"];
+
+    <p id="sisteHenvendelse">Din siste henvendelse blei registrert: @sisteHenvendelse</p>
+}
+
+<h2>Velkommen til HotPizza!</h2>
+<p>Her kan du som kunde gi oss ris/ros, komme med spørsmål, eller sjå vår pizza-meny.</p>

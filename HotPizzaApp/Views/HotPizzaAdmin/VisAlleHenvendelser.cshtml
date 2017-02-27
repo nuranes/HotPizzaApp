@@ -1,0 +1,28 @@
+﻿@model IEnumerable<HotPizzaApp.Models.Henvendelse>
+@{
+    ViewBag.Title = "Alle henvendelser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Alle henvendelser</h2>
+
+@if (Model != null)
+{ //Dersom feil skulle oppstå med henting av databasen.
+    foreach (var henvendelse in Model)
+    {
+        <article id="henvendelseArt">
+            <h3>@henvendelse.Tittel</h3>
+            <p>@henvendelse.Tekst</p>
+
+            <ul>
+                <li>Navn: @henvendelse.Navn</li>
+                <li>Epost: @henvendelse.Epost</li>
+            </ul>
+        </article>
+    }
+}
+else
+{
+    <p>Noko gjekk galt med databasen, prøv igjen.</p>
+}
+

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+@*Layout meint for kunde-delen*@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/CSS/MainStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HotPizza</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "HotPizza")</li>
+                <li>@Html.ActionLink("Pizza", "VisAllePizza", "HotPizza")</li>
+                <li>@Html.ActionLink("Send inn en henvendelse", "LagHenvendelse", "HotPizza")</li>
+            </ul>
+        </nav>
+
+        @if (Session["LoggetInnBruker"] == null) //Dersom brukar ikkje er pålogga
+        {
+            <section class="adminSec">
+                <p>@Html.ActionLink("Adminisider", "LoggInn", "HotPizzaAdmin")</p>
+                <p class="ikkjeLoggaInn">Du er ikkje logga på.</p>
+            </section>
+        }
+        else //Dersom brukar er pålogga
+        {
+            <section class="adminSec">
+                <p class="loggaInn">Du er logga inn som admin.</p>
+                <p>@Html.ActionLink("Adminisider", "IndexAdmin", "HotPizzaAdmin")</p>
+                <p>@Html.ActionLink("Logg ut", "LoggUt", "HotPizzaAdmin")</p>
+            </section>
+        }
+
+        <section class="content">
+            @RenderBody() @*View med dette layoutet blir henta inn*@
+        </section>
+
+        <footer>
+            HotPizza &copy; 2016
+        </footer>
+
+    </div>
+</body>
+</html>

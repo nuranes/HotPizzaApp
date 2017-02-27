@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotPizzaDBModelStoreContainer" CdmEntityContainer="HotPizzaDBEntities">
+    <EntitySetMapping Name="Ansatt">
+      <EntityTypeMapping TypeName="HotPizzaDBModel.Ansatt">
+        <MappingFragment StoreEntitySet="Ansatt">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Fornavn" ColumnName="Fornavn" />
+          <ScalarProperty Name="Etternavn" ColumnName="Etternavn" />
+          <ScalarProperty Name="Mobil" ColumnName="Mobil" />
+          <ScalarProperty Name="BildeSrc" ColumnName="BildeSrc" />
+          <ScalarProperty Name="AvdelingId" ColumnName="AvdelingId" />
+          <ScalarProperty Name="RolleId" ColumnName="RolleId" />
+          <ScalarProperty Name="Brukernavn" ColumnName="Brukernavn" />
+          <ScalarProperty Name="Passord" ColumnName="Passord" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Avdeling">
+      <EntityTypeMapping TypeName="HotPizzaDBModel.Avdeling">
+        <MappingFragment StoreEntitySet="Avdeling">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+          <ScalarProperty Name="Postnummer" ColumnName="Postnummer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Henvendelse">
+      <EntityTypeMapping TypeName="HotPizzaDBModel.Henvendelse">
+        <MappingFragment StoreEntitySet="Henvendelse">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+          <ScalarProperty Name="Epost" ColumnName="Epost" />
+          <ScalarProperty Name="Tittel" ColumnName="Tittel" />
+          <ScalarProperty Name="Tekst" ColumnName="Tekst" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pizza">
+      <EntityTypeMapping TypeName="HotPizzaDBModel.Pizza">
+        <MappingFragment StoreEntitySet="Pizza">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+          <ScalarProperty Name="Beskrivelse" ColumnName="Beskrivelse" />
+          <ScalarProperty Name="Pris" ColumnName="Pris" />
+          <ScalarProperty Name="BildeSrc" ColumnName="BildeSrc" />
+          <ScalarProperty Name="AnsattId" ColumnName="AnsattId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rolle">
+      <EntityTypeMapping TypeName="HotPizzaDBModel.Rolle">
+        <MappingFragment StoreEntitySet="Rolle">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+          <ScalarProperty Name="Beskrivelse" ColumnName="Beskrivelse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

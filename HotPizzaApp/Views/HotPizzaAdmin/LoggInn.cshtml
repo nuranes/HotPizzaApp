@@ -1,0 +1,58 @@
+﻿@model HotPizzaApp.Models.Ansatt
+@{
+    Layout = null; //Henter inn ingen layout
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Logg inn</title>
+    <link href="~/CSS/MainStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="contentLoggInn">
+        <h2>Logg inn</h2>
+
+        <nav>
+            <p>@Html.ActionLink("Tilbake", "Index", "HotPizza")</p> @*Tilbake-knapp til kunde-side*@
+        </nav>
+
+        <p>Her kan du som admin logge deg inn.</p>
+
+        @using (Html.BeginForm())
+        {
+            <table>
+                <tr>
+                    <td><lable>Brukernavn</lable></td>
+                    <td>@Html.TextBoxFor(bruker => bruker.Brukernavn)</td>
+                    <td>@Html.ValidationMessageFor(bruker => bruker.Brukernavn, "Brukernavn må fyllast inn")</td> @*Dersom brukernavn manglar*@
+                </tr>
+
+                <tr>
+                    <td><lable>Passord</lable></td>
+                    <td>@Html.PasswordFor(bruker => bruker.Passord)</td>
+                    <td>@Html.ValidationMessageFor(bruker => bruker.Passord, "Passord må fyllast inn")</td> @*Dersom passord manglar*@
+                </tr>
+            </table>
+
+            <input id="loggInnBtn" type="submit" value="Logg inn" />
+        }
+
+        @{
+            if (ViewBag.LoggInnStatus != null)
+            {
+                if (ViewBag.LoggInnStatus == true)
+                {
+                    <p class="loggaInn">Du har no logga inn!</p>
+                }
+                else
+                {
+                    <p class="ikkjeLoggaInn">Du blei IKKJE logga inn. <br /> Brukernavn/passord kan være feil eller du er ingen admin. Prøv igjen!</p>
+                }
+            }
+        }
+    </div>
+</body>
+</html>

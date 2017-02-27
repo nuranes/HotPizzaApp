@@ -1,0 +1,96 @@
+﻿@model HotPizzaApp.Models.Ansatt
+@{
+    ViewBag.Title = "Registrer ny ansatt";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Registrer ny ansatt</h2>
+<p>@ViewBag.Feilmelding</p> @*Feilmelding, dersom problemer med databasen skulle oppstå*@
+
+@using (Html.BeginForm("RegistrerNyAnsatt", "HotPizzaAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr>
+            <td><lable>Fornavn</lable></td>
+            <td>@Html.TextBoxFor(ansatt => ansatt.Fornavn)</td>
+            <td>@Html.ValidationMessageFor(ansatt => ansatt.Fornavn)</td>
+        </tr>
+
+        <tr>
+            <td><lable>Etternavn</lable></td>
+            <td>@Html.TextBoxFor(ansatt => ansatt.Etternavn)</td>
+            <td>@Html.ValidationMessageFor(ansatt => ansatt.Etternavn)</td>
+        </tr>
+
+        <tr>
+            <td><lable>Mobil</lable></td>
+            <td>@Html.TextBoxFor(ansatt => ansatt.Mobil)</td>
+            <td>@Html.ValidationMessageFor(ansatt => ansatt.Mobil)</td>
+        </tr>
+
+        <tr>
+            <td><lable>Bilde</lable></td>
+            <td><input type="file" id="file" name="upload" /></td>
+        </tr>
+
+        <tr>
+            <td><lable>Avdeling</lable></td>
+            <td>
+                @Html.DropDownListFor(ansatt => ansatt.AvdelingId, new[]{
+                   new SelectListItem()
+                   {
+                       Text = "Velg", Value = ""
+                   },
+                   new SelectListItem()
+                   {
+                       Text = "Grünerløkka", Value = "10"
+                   },
+                   new SelectListItem()
+                   {
+                       Text = "St. Hanshaugen", Value = "11"
+                   },
+                   new SelectListItem()
+                   {
+                       Text = "Majorstua", Value = "12"
+                   },
+                   new SelectListItem()
+                   {
+                       Text = "Sagene", Value = "13"
+                   }
+           })
+            </td>
+            <td>@Html.ValidationMessageFor(ansatt => ansatt.AvdelingId)</td>
+        </tr>
+
+        <tr>
+            <td><lable>Rolle</lable></td>
+            <td>
+                @Html.DropDownListFor(ansatt => ansatt.RolleId, new[]{
+                    new SelectListItem()
+                    {
+                        Text = "Vanlig", Value = "200"
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Leder", Value = "100"
+                    }
+                })
+            </td>
+        </tr>
+
+        <tr>
+            <td><lable>Brukernavn</lable></td>
+            <td>@Html.TextBoxFor(ansatt => ansatt.Brukernavn)</td>
+            <td>@Html.ValidationMessageFor(ansatt => ansatt.Brukernavn, "Brukernavn må opprettast")</td>
+        </tr>
+
+        <tr>
+            <td><lable>Passord</lable></td>
+            <td>@Html.TextBoxFor(ansatt => ansatt.Passord)</td>
+            <td>@Html.ValidationMessageFor(ansatt => ansatt.Passord, "Passord må opprettast")</td>
+        </tr>
+</table>
+
+    <input id="lagreAnsattBtn" type="submit" value="Lagre ansatt" />
+}
+

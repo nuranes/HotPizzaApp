@@ -1,0 +1,21 @@
+﻿@model HotPizzaApp.Models.Ansatt
+@{
+    ViewBag.Title = "Slett ansatt";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@*Visning for ansatt som skal slettast*@
+<h2>Slett ansatt</h2>
+<p>@ViewBag.Feilmelding</p>
+
+@using (Html.BeginForm())
+{
+    <article>
+        <h3>@Model.Fornavn @Model.Etternavn</h3>
+        @if (@Model.BildeSrc != null) /*Dersom det finst eit bilde av den ansatte, vis bilde.*/
+        {
+            <img src="~/Content/Images_Ansatte/@Model.BildeSrc" alt="@Model.Fornavn @Model.Etternavn" /><br />
+        }
+        <input id="slettAnsattBtn" type="submit" value="Slett" />
+    </article>
+}
+

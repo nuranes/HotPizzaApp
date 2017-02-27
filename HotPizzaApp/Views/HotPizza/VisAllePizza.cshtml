@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HotPizzaApp.Models.Pizza>
+    @{
+        ViewBag.Title = "Alle pizza";
+    }
+
+    <h2>Pizza-meny</h2>
+
+    @if (Model != null)
+    { //Dersom feil skulle oppstå med henting av databasen.
+        foreach (var pizza in Model)
+        {
+            <article id="pizzaArt">
+                <h3>@pizza.Navn</h3>
+                @if (@pizza.BildeSrc != null) //Dersom det finst eit bilde av den pizzaen, vis bildet.
+                {
+                    <img src="~/Content/Images_Pizza/@pizza.BildeSrc" alt="@pizza.Navn" />
+                }
+                <ul>
+                    <li>Beskrivelse: @pizza.Beskrivelse</li>
+                    @if (pizza.Ansatt != null)
+                    {
+                        <li>Baker: @pizza.Ansatt.Fornavn @pizza.Ansatt.Etternavn</li>
+                    }
+                </ul>
+            </article>
+        }
+    }
+    else
+    {
+        <p>Noko gjekk galt med databasen, prøv igjen.</p>
+    }
+

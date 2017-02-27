@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HotPizzaApp.Models.Ansatt>
+@{
+    ViewBag.Title = "Alle ansatte";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Alle ansatte</h2>
+
+@*Bekreftelse på oppretta ansatt, dersom dette nettopp er utført.*@
+@if (Session["nyasteAnsatt"] != null)
+{
+    String nyasteAnsatt = (String)Session["nyasteAnsatt"];
+
+    <p id="nyasteAnsatt">Siste registrerte ansatt er @nyasteAnsatt.</p>
+}
+
+@*Bekreftelse på redigert ansatt, dersom dette nettopp er utført.*@
+@if (Session["redigertAnsatt"] != null)
+{
+    String redigertAnsatt = (String)Session["redigertAnsatt"];
+
+    <p id="redigertAnsatt">Redigering av @redigertAnsatt er lagret.</p>
+}
+
+@*Bekreftelse på sletta ansatt, dersom dette nettopp er utført.*@
+@if (Session["slettAnsatt"] != null)
+{
+    String slettAnsatt = (String)Session["slettAnsatt"];
+
+    <p id="slettAnsatt">Sletting av @slettAnsatt er fullført.</p>
+}
+
+@if (Model != null)
+{ /*Dersom feil skulle oppstå med henting av databasen.*/
+    foreach (var ansatt in Model)
+    {
+        <article id="ansatteArt">
+            <h3>@ansatt.Fornavn @ansatt.Etternavn</h3>
+            @if (@ansatt.BildeSrc != null) /*Dersom det finst eit bilde av den ansatte, vis bilde.*/
+            {
+                <img src="~/Content/Images_Ansatte/@ansatt.BildeSrc" alt="@ansatt.Fornavn @ansatt.Etternavn" />
+            }
+            <ul>
+                <li>Mobil: @ansatt.Mobil</li>
+                <li>Avdeling: @ansatt.Avdeling.Navn</li> @*Henter navn på avdeling fra tabelen Avdeling*@
+                <li>Rolle: @ansatt.Rolle.Navn</li> @*Henter navn på rolle fra tabelen Rolle*@
+            </ul>
+
+            @Html.ActionLink("Rediger", "RedigerAnsatt", new { id = ansatt.Id })
+            @Html.ActionLink("Slett", "SlettAnsatt", new { id = ansatt.Id })
+        </article>
+    }
+}
+else
+{
+    <p>Noko gjekk galt med databasen, prøv igjen.</p>
+}
+
